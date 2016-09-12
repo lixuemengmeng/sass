@@ -1,0 +1,92 @@
+$color:#eee;
+$color:yellow !default;
+body{
+	background: $color;
+	div{
+		background: red;
+	}
+}
+html{
+	background: $color;
+}
+.nav{
+	padding: {
+		left:10px;
+		top:10px;
+	}
+}
+a{
+	&:hover{
+		color:red;
+	};
+}
+
+$class:aa;
+$bg:background;
+.#{$class}
+{
+	#{$bg}:red;
+	background-image:url(#{$class}.jpg);
+}
+@mixin border($w:100px,$h:200px){
+	width: $w;
+	height: $h;
+
+}
+.item1{
+	@include border();
+	a{
+		color: blue;
+	}
+}
+.item2 {
+	@include border();
+}
+.item{
+	@extend .item1;
+	padding: 10px;
+}
+@function add($i,$j){
+	@return $i+$j;
+} 
+.item3{
+	width:add(3px,5);//会生成8px
+}
+@for $i from 1 through 5{
+	.fore#{$i}{
+		width:200px*$i;
+	}
+}
+$j:0;
+@while $j<5{
+	.test#{$j}{
+		background: red;
+	}
+	$j:$j+2;
+}
+$list:left right;
+@each $i in $list{
+	.nav-#{$i}{
+		background: url('#{$i}.jpg');
+	}
+}
+
+@mixin arrow($direction){
+	width: 0;
+	height: 0;
+	font-size: 0;
+	line-height: 0;
+	border-width: 10px;
+	position: absolute;
+	@if $direction=='bottom'{
+		border-color: red transparent transparent transparent;
+		border-style: solid dashed dashed dashed;
+	}
+	
+	
+}
+.item4{
+	@include arrow(bottom);
+}
+
+
